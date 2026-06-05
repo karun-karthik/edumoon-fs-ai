@@ -1,0 +1,521 @@
+/* name, .class-name, #id-property */
+* {
+    margin: 0; /* controls the distance between 2 html elements  */
+    padding: 0; /* controls the distance between html element and it's content  */
+    box-sizing: border-box;
+}
+
+:root {
+    --light-red: #39ce43;   
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background: linear-gradient(to left, var(--light-red), #261ec3);
+    color: white;
+    text-align: center;
+    padding: 16px;
+    /* padding: 16px 8px;
+    padding: 16px 4px 8px 12px; */
+    margin: 20px;
+}
+
+nav {
+    background: white;
+    padding: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 4px 8px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color:  var(--light-red);
+}
+
+nav a:active {
+    color: yellow;
+}
+
+.concept-section {
+    background: white;
+    padding: 2rem; /* rem, em */
+    margin: 2rem auto;
+    border-radius: 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 10px;
+}
+
+.highlight {
+    background-color: #ffeb3b;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+#special {
+    background-color: #ff483b;
+    font-weight: bold;
+}
+
+.nested p {
+    border-left: 4px dotted greenyellow;
+    padding-left: 1rem;
+}
+
+.box-model-example {
+    position: relative;
+    margin: 2rem;
+}
+
+.content {
+    background-color: #7069f4;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.padding {
+    background-color: #ffeb3b;
+    padding: 1rem;
+}
+
+.border {
+    border: 5px dashed green;
+}
+
+.margin {
+    margin: 2rem;
+    background-color: lightblue;
+    color: white;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+}
+
+.flex-item {
+    background-color: #ff483b;
+    padding: 1rem;
+    color: white;
+    text-align: center;
+    transition: transform 3s ease;
+}
+
+.flex-item:hover {
+    transform: translateX(-90px);
+}
+
+.flex-item:nth-child(3):hover {
+    background:#ffeb3b;
+    color: #333;
+}
+
+.flex-item:first-child:hover {
+    background:#ff3bd5;
+    color: #333;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    background-color: #f4f4f4;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.grid-item {
+    background-color: #7069f4;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.animation-example {
+    height: 200px;
+    background-color: #85c4ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.animation-box {
+    height: 50px;
+    width: 50px;
+    background-color: #7069f4;
+    animation: bounce_box 2s infinite;
+}
+
+@keyframes bounce_box {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-30px);
+    }
+
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+.variable-box {
+    background-color: var(--light-red);
+}
+
+.pseudo-element-example {
+    background-color: var(--light-red);
+}
+
+.pseudo-element-example::first-line {
+    font-weight: bold;
+    color: #413bff;
+}
+
+.pseudo-element-example::before {
+    content: "->";
+    color: red;
+}
+
+.filter-demo {
+    filter: grayscale(100%) brightness(1.5);
+}
+
+.cursor-demo {
+    display: inline-block;
+    padding: 1rem;
+}
+
+.cursor-box {
+    padding: 1rem;
+    margin: 0.25rem auto;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.wait {
+    cursor: wait;
+}
+
+.text {
+    cursor: text;
+}
+
+.move {
+    cursor: move;
+}
+
+.parent {
+    color: #39ce43;
+    font-size: 1.2rem;
+}
+
+.override {
+    color: red;
+    font-size: 1.5rem;
+}
+
+
+/* Descendant combinator (space):
+   Targets ALL <p> elements anywhere inside .combinator-demo */
+.combinator-demo p {
+    background-color: #e8f5e9;
+    border-left: 4px solid #4caf50;
+    padding: 0.4rem 0.75rem;
+    margin: 0.4rem 0;
+    border-radius: 4px;
+}
+
+/* Child combinator (>):
+   Targets ONLY direct <p> children of .child-combinator-demo */
+.child-combinator-demo>p {
+    background-color: #fff3e0;
+    border-left: 4px solid #ff9800;
+    padding: 0.4rem 0.75rem;
+    margin: 0.4rem 0;
+    border-radius: 4px;
+}
+
+/* Grandchild <p> inside .child-combinator-demo — NOT matched by > */
+.child-combinator-demo div p {
+    background-color: #fce4ec;
+    border-left: 4px dashed #e91e63;
+    padding: 0.4rem 0.75rem;
+    margin: 0.4rem 0;
+    border-radius: 4px;
+    font-style: italic;
+    color: #888;
+}
+
+.combinator-demo,
+.child-combinator-demo {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 6px;
+}
+
+.attr-demo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input[type] {
+    border: 2px solid #7069f4;
+}
+
+input[type="email"] {
+    border: 2px solid #69f49c;
+}
+
+a[href^="https"] {
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+a[href^="https"]::before {
+    content: "🔒 ";
+}
+
+a[href$=".pdf"] {
+    color: #b71c1c;
+}
+
+a[href$=".pdf"]::after {
+    content: " (PDF)";
+    font-size: 0.8em;
+    color: #888;
+}
+
+a[href*="goo"] {
+    color: #1565c0;
+    text-decoration: underline dotted;
+}
+
+/* Typography */
+
+
+.typo-card {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin: 0.75rem 0;
+}
+
+.typo-label {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: black;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.6rem;
+    border-radius: 3px;
+    margin-bottom: 0.75rem;
+}
+
+/* --- font-family --- */
+.typo-serif {
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.typo-mono {
+    font-family: "Courier New", Courier, monospace;
+}
+
+.typo-poppins {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- font-size --- */
+.fs-small {
+    font-size: 0.75rem;
+}
+
+.fs-base {
+    font-size: 1rem;
+}
+
+.fs-large {
+    font-size: 1.5rem;
+}
+
+.fs-xlarge {
+    font-size: 2rem;
+}
+
+/* --- font-weight --- */
+.fw-300 {
+    font-weight: 300;
+}
+
+.fw-400 {
+    font-weight: 400;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+/* --- font-style --- */
+.fstyle-normal {
+    font-style: normal;
+}
+
+.fstyle-italic {
+    font-style: italic;
+}
+
+.fstyle-oblique {
+    font-style: oblique;
+}
+
+/* --- line-height --- */
+.lh-tight {
+    line-height: 1;
+    margin-bottom: 0.75rem;
+}
+
+.lh-normal {
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.lh-loose {
+    line-height: 2.2;
+    margin-bottom: 0.75rem;
+}
+
+/* --- letter-spacing --- */
+.ls-tight {
+    letter-spacing: -0.05em;
+}
+
+.ls-normal {
+    letter-spacing: 0;
+}
+
+.ls-wide {
+    letter-spacing: 0.15em;
+}
+
+.ls-xwide {
+    letter-spacing: 0.4em;
+}
+
+/* --- text-align --- */
+.ta-left {
+    text-align: left;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+.ta-right {
+    text-align: right;
+}
+
+.ta-justify {
+    text-align: justify;
+}
+
+/* --- text-decoration --- */
+.td-none {
+    text-decoration: none;
+}
+
+.td-underline {
+    text-decoration: underline;
+}
+
+.td-overline {
+    text-decoration: overline;
+}
+
+.td-linethrough {
+    text-decoration: line-through;
+}
+
+.td-wavy {
+    text-decoration: underline wavy red;
+}
+
+/* --- text-transform --- */
+.tt-none {
+    text-transform: none;
+}
+
+.tt-upper {
+    text-transform: uppercase;
+}
+
+.tt-lower {
+    text-transform: lowercase;
+}
+
+.tt-capitalize {
+    text-transform: capitalize;
+}
+
+/* --- Google Font (Poppins) showcase --- */
+.gf-regular {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.gf-semibold {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.gf-bold {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.gf-italic {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* spacing between typo-card paragraphs */
+.typo-card p {
+    margin: 0.3rem 0;
+}

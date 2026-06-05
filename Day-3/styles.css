@@ -1,0 +1,135 @@
+/* name, .class-name, #id-property */
+* {
+    margin: 0; /* controls the distance between 2 html elements  */
+    padding: 0; /* controls the distance between html element and it's content  */
+    box-sizing: border-box;
+}
+
+:root {
+    --light-red: #39ce43;   
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background: linear-gradient(to left, var(--light-red), #261ec3);
+    color: white;
+    text-align: center;
+    padding: 16px;
+    /* padding: 16px 8px;
+    padding: 16px 4px 8px 12px; */
+    margin: 20px;
+}
+
+nav {
+    background: white;
+    padding: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 4px 8px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color:  var(--light-red);
+}
+
+nav a:active {
+    color: yellow;
+}
+
+.concept-section {
+    background: white;
+    padding: 2rem; /* rem, em */
+    margin: 2rem auto;
+    border-radius: 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 10px;
+}
+
+.highlight {
+    background-color: #ffeb3b;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+#special {
+    background-color: #ff483b;
+    font-weight: bold;
+}
+
+.nested p {
+    border-left: 4px dotted greenyellow;
+    padding-left: 1rem;
+}
+
+.box-model-example {
+    position: relative;
+    margin: 2rem;
+}
+
+.content {
+    background-color: #7069f4;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.padding {
+    background-color: #ffeb3b;
+    padding: 1rem;
+}
+
+.border {
+    border: 5px dashed green;
+}
+
+.margin {
+    margin: 2rem;
+    background-color: lightblue;
+    color: white;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+}
+
+.flex-item {
+    background-color: #ff483b;
+    padding: 1rem;
+    color: white;
+    text-align: center;
+    transition: transform 3s ease;
+}
+
+.flex-item:hover {
+    transform: translateX(-90px);
+}
+
+.flex-item:nth-child(3):hover {
+    background:#ffeb3b;
+    color: #333;
+}
+
+.flex-item:first-child:hover {
+    background:#ff3bd5;
+    color: #333;
+}

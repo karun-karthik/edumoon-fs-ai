@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Playground</title>
+    <link href="./styles.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>CSS Playground</h1>
+        <p>List of examples</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#selectors">Selectors</a></li>
+            <li><a href="#box-model">Box Model</a></li>
+            <li><a href="#flexbox">Flexbox</a></li>
+            <li><a href="#grid">Grid</a></li>
+            <li><a href="#animations">Animations</a></li>
+            <li><a href="#advanced-concepts">Advanced</a></li>
+            <li><a href="#combinators">Combinators</a></li>
+            <li><a href="#sibling-combinators">Siblings</a></li>
+            <li><a href="#attribute-selectors">Attributes</a></li>
+            <li><a href="#pseudo-classes">Pseudo-classes</a></li>
+            <li><a href="#child-selectors">Child Selectors</a></li>
+            <li><a href="#pseudo-elements-new">::before/::after</a></li>
+            <li><a href="#typography">Typography</a></li>
+        </ul>
+    </nav>
+    <main>
+
+        <section id="selectors" class="concept-section">
+            <h2>Selectors</h2>
+            <div class="example-box">
+                <p class="highlight">This is the highlighted text</p>
+                <p id="special">This is the selected by ID </p>
+                <div class="nested"><p>This is the nested</p></div>
+            </div>
+        </section>
+
+        <section id="box-model" class="concept-section">
+            <h2>Box Model</h2>
+            <div class="box-model-example">
+                <div class="content">Content</div>
+                <div class="padding">Padding</div>
+                <div class="border">Border</div>
+                <div class="margin">Margin</div>
+            </div>
+        </section>
+
+        <section id="flexbox" class="concept-section">
+            <h2>Flexbox</h2>
+            <div class="flex-container">
+                <div class="flex-item">Item 1</div>
+                <div class="flex-item">Item 2</div>
+                <div class="flex-item">Item 3</div>
+                <div class="flex-item">Item 4</div>
+                <div class="flex-item">Item 5</div>
+            </div>
+        </section>
+
+        <section id="grid" class="concept-section">
+            <h2>Grid</h2>
+            <div class="grid-container">
+                <div class="grid-item">1</div>
+                <div class="grid-item">2</div>
+                <div class="grid-item">3</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">5</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">7</div>
+            </div>
+        </section>
+
+        <section id="animations" class="concept-section">
+            <h2>Animations</h2>
+            <b>Bold</b>
+            <u>Underlined</u>
+            <i>Italic</i>
+            <sub>Subscript</sub>
+            <sup>Superscript</sup>
+            <s>Strikethrough</s>
+            <div class="animation-example">
+                <div class="animation-box"></div>
+            </div>
+        </section>
+
+        <section id="advanced-concepts" class="concept-section">
+            <h2>Advanced Concepts</h2>
+
+            <div class="variables-demo">
+                <h3>CSS Variables</h3>
+                <div class="variable-box">This statement uses CSS variables</div>
+            </div>
+
+            <div class="pseudo-elements">
+                <h3>Pseudo-elements</h3>
+                <div class="pseudo-element-example">
+                    <p>This is a paragraph with a pseudo-element.</p>
+                    <p>This is a paragraph with a pseudo-element.</p>
+                </div>
+            </div>
+
+            <div class="transform-example">
+                <h3>Transform</h3>
+                <div class="transform-box">Hover me</div>
+            </div>
+
+            <div class="filter-demo">
+                <h3>Filter</h3>
+                <img src="https://picsum.photos/200" class="filter-image" alt="Placeholder Image">
+            </div>
+
+            <div class="cursor-demo">
+                <h3>Cursors</h3>
+                <div class="cursor-box pointer">Pointer</div>
+                <div class="cursor-box wait">Wait</div>
+                <div class="cursor-box text">Text</div>
+                <div class="cursor-box move">Move</div>
+            </div>
+
+            <div class="inheritance-demo">
+                <h3>Inheritance</h3>
+                <div class="parent">
+                    <p>This text is inherited from the parent.</p>
+                    <div class="child override">
+                        <p>This text is also inherited, but can be overridden.</p>
+                    </div>
+                    <p>This text is inherited from the parent and below child.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="combinators" class="concept-section">
+            <h2>1. Descendant &amp; Child Combinators</h2>
+            <p class="section-desc">
+                <strong>Descendant ( space )</strong> targets any matching element anywhere inside an ancestor.<br>
+                <strong>Child ( &gt; )</strong> targets only <em>direct</em> children.
+            </p>
+
+            <div class="combinator-demo">
+                <h3>Descendant combinator example</h3>
+                <!-- .combinator-demo p  →  styles ALL paragraphs inside, even deeply nested -->
+                <p>I am a direct child paragraph — styled by descendant combinator.</p>
+                <div>
+                    <p>I am a grandchild paragraph — also styled by descendant combinator.</p>
+                    <div>
+                        <p>I am a great-grandchild — still styled by descendant combinator.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="child-combinator-demo">
+                <h3>Child combinator example</h3>
+                <!-- .child-combinator-demo > p  →  only DIRECT child paragraphs -->
+                <p>I am a direct child — styled by child combinator (&gt;).</p>
+                <div>
+                    <p>I am a grandchild — NOT styled by child combinator.</p>
+                </div>
+                <p>I am another direct child — also styled by child combinator.</p>
+            </div>
+        </section>
+
+        <section id="sibling-combinators" class="concept-section">
+            <h2>2. Adjacent &amp; General Sibling Combinators</h2>
+            <p class="section-desc">
+                <strong>Adjacent sibling ( + )</strong> targets the element <em>immediately</em> after a sibling.<br>
+                <strong>General sibling ( ~ )</strong> targets <em>all</em> matching elements after a sibling.
+            </p>
+
+            <div class="sibling-demo">
+                <h3>Adjacent sibling ( + )</h3>
+                <p class="sibling-trigger">I am the trigger paragraph.</p>
+                <p>I am the adjacent sibling — highlighted by + combinator.</p>
+                <p>I am the second sibling — NOT highlighted by + combinator.</p>
+                <p>I am the third sibling — NOT highlighted by + combinator.</p>
+            </div>
+
+            <div class="sibling-demo">
+                <h3>General sibling ( ~ )</h3>
+                <p class="general-trigger">I am the trigger paragraph.</p>
+                <p>I am the first sibling after trigger — highlighted by ~ combinator.</p>
+                <p>I am the second sibling — also highlighted by ~ combinator.</p>
+                <p>I am the third sibling — also highlighted by ~ combinator.</p>
+            </div>
+        </section>
+
+        <section id="attribute-selectors" class="concept-section">
+            <h2>3. Attribute Selectors</h2>
+            <p class="section-desc">Select elements based on the presence or value of their HTML attributes.</p>
+
+            <div class="attr-demo">
+                <!-- [attr]  — has the attribute -->
+                <input type="text" placeholder="[type] — any input with type attr">
+
+                <!-- [attr="value"]  — exact match -->
+                <input type="email" placeholder='[type="email"] — exact match'>
+
+                <!-- [attr^="value"]  — starts with -->
+                <a href="https://example.com" class="attr-link">href starts with "https" (^=)</a>
+
+                <!-- [attr$="value"]  — ends with -->
+                <a href="page.pdf" class="attr-link">href ends with ".pdf" ($=)</a>
+
+                <!-- [attr*="value"]  — contains -->
+                <a href="https://google.com/search" class="attr-link">href contains "google" (*=)</a>
+
+                <!-- [attr~="value"]  — word in space-separated list -->
+                <p data-tags="css tutorial beginner" class="attr-tag">data-tags contains word "tutorial" (~=)</p>
+            </div>
+        </section>
+
+        <section id="pseudo-classes" class="concept-section">
+            <h2>4. :hover, :active, :focus, :visited</h2>
+            <p class="section-desc">State-based pseudo-classes respond to user interaction.</p>
+
+            <div class="pseudo-class-demo">
+                <a href="#pseudo-classes" class="state-link">Hover, click, or visit me</a>
+
+                <input type="text" class="state-input" placeholder="Click to focus me">
+
+                <button class="state-btn">Hold me down (:active)</button>
+            </div>
+        </section>
+
+        <section id="child-selectors" class="concept-section">
+            <h2>5. :first-child, :last-child, :only-child</h2>
+            <p class="section-desc">Target elements based on their position among siblings.</p>
+
+            <ul class="child-list">
+                <li>First item — :first-child</li>
+                <li>Second item</li>
+                <li>Third item</li>
+                <li>Fourth item</li>
+                <li>Last item — :last-child</li>
+            </ul>
+
+            <div class="only-child-demo">
+                <h3>:only-child example</h3>
+                <div class="only-parent">
+                    <!-- single child → :only-child applies -->
+                    <p>I am the only child — :only-child applies.</p>
+                </div>
+                <div class="only-parent">
+                    <!-- two children → :only-child does NOT apply -->
+                    <p>I have a sibling, so :only-child does NOT apply.</p>
+                    <p>Me too — :only-child does NOT apply.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pseudo-elements-new" class="concept-section">
+            <h2>6. ::before &amp; ::after</h2>
+            <p class="section-desc">
+                Insert generated content <em>before</em> or <em>after</em> an element's actual content
+                without touching the HTML.
+            </p>
+
+            <div class="before-after-demo">
+                <!-- ::before adds a quote mark before the text -->
+                <blockquote class="styled-quote">
+                    Design is not just what it looks like. Design is how it works.
+                </blockquote>
+
+                <!-- ::after adds a decorative underline -->
+                <h3 class="underline-heading">Hover to reveal underline</h3>
+
+                <!-- ::before used as a badge/label -->
+                <div class="badge-item">New feature announcement</div>
+
+                <!-- ::after used as a tooltip-style tag -->
+                <span class="required-field">Email address</span>
+            </div>
+        </section>
+
+        <section id="typography" class="concept-section">
+            <h2>7. Typography</h2>
+            <p class="section-desc">
+                Demonstrates <code>font-family</code>, <code>font-size</code>, <code>font-weight</code>,
+                <code>font-style</code>, <code>line-height</code>, <code>letter-spacing</code>,
+                <code>text-align</code>, <code>text-decoration</code>, <code>text-transform</code>,
+                Google Fonts, and web fonts.
+            </p>
+
+            <div class="typo-card">
+                <span class="typo-label">font-family</span>
+                <p class="typo-serif">Serif — Georgia, "Times New Roman", serif</p>
+                <p class="typo-mono">Monospace — "Courier New", Courier, monospace</p>
+                <p class="typo-poppins">Google Font — Poppins (loaded via &lt;link&gt;)</p>
+            </div>
+
+            <div class="typo-card">
+                <span class="typo-label">font-size</span>
+                <p class="fs-small">font-size: 0.75rem (12 px)</p>
+                <p class="fs-base">font-size: 1rem (16 px — base)</p>
+                <p class="fs-large">font-size: 1.5rem (24 px)</p>
+                <p class="fs-xlarge">font-size: 2rem (32 px)</p>
+            </div>
+
+            <div class="typo-card">
+                <span class="typo-label">font-weight</span>
+                <p class="fw-300">font-weight: 300 — Light</p>
+                <p class="fw-400">font-weight: 400 — Regular</p>
+                <p class="fw-600">font-weight: 600 — Semi-bold</p>
+                <p class="fw-700">font-weight: 700 — Bold</p>
+            </div>
+
+            <div class="typo-card">
+                <span class="typo-label">font-style</span>
+                <p class="fstyle-normal">font-style: normal</p>
+                <p class="fstyle-italic">font-style: italic</p>
+                <p class="fstyle-oblique">font-style: oblique</p>
+            </div>
+
+            <div class="typo-card">
+                <span class="typo-label">line-height</span>
+                <p class="lh-tight">line-height: 1 — Tight. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                <p class="lh-normal">line-height: 1.6 — Normal. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                <p class="lh-loose">line-height: 2.2 — Loose. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+            </div>
+
+            <div class="typo-card">
+                <span class="typo-label">letter-spacing</span>
+                <p class="ls-tight">letter-spacing: -0.05em — Tight</p>
+                <p class="ls-normal">letter-spacing: 0 — Normal</p>
+                <p class="ls-wide">letter-spacing: 0.15em — Wide</p>
+                <p class="ls-xwide">letter-spacing: 0.4em — Extra wide</p>
+            </div>
+
+            <div class="typo-card">
+                <span class="typo-label">text-align</span>
+                <p class="ta-left">text-align: left</p>
+                <p class="ta-center">text-align: center</p>
+                <p class="ta-right">text-align: right</p>
+                <p class="ta-justify">text-align: justify — Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+            </div>
+
+            <div class="typo-card">
+                <span class="typo-label">text-decoration</span>
+                <p class="td-none">text-decoration: none</p>
+                <p class="td-underline">text-decoration: underline</p>
+                <p class="td-overline">text-decoration: overline</p>
+                <p class="td-linethrough">text-decoration: line-through</p>
+                <p class="td-wavy">text-decoration: underline wavy red</p>
+            </div>
+
+            <div class="typo-card">
+                <span class="typo-label">text-transform</span>
+                <p class="tt-none">text-transform: none — Hello World</p>
+                <p class="tt-upper">text-transform: uppercase — Hello World</p>
+                <p class="tt-lower">text-transform: lowercase — Hello World</p>
+                <p class="tt-capitalize">text-transform: capitalize — hello world</p>
+            </div>
+
+            <div class="typo-card">
+                <span class="typo-label">Google Font — Poppins in action</span>
+                <p class="gf-regular">Poppins 400 — The quick brown fox jumps over the lazy dog.</p>
+                <p class="gf-semibold">Poppins 600 — The quick brown fox jumps over the lazy dog.</p>
+                <p class="gf-bold">Poppins 700 — The quick brown fox jumps over the lazy dog.</p>
+                <p class="gf-italic">Poppins 400 italic — The quick brown fox jumps over the lazy dog.</p>
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>

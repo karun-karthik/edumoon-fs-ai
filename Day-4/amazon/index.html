@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amazon.in: Online Shopping India</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <style>
+    body { background-color: #eaeded; font-family: Arial, sans-serif; }
+
+    /* ── NAVBAR ── */
+    .amazon-nav { background-color: #131921; }
+    .amazon-nav .navbar-brand img { height: 45px; }
+    .amazon-nav .deliver-to { color: #ccc; font-size: 0.72rem; line-height: 1; }
+    .amazon-nav .deliver-location { color: #fff; font-size: 0.85rem; font-weight: 700; }
+
+    /* Search bar */
+    .search-category {
+      background-color: #f3f3f3;
+      border: none;
+      border-radius: 4px 0 0 4px;
+      font-size: 0.8rem;
+      color: #333;
+      padding: 0 8px;
+      height: 40px;
+      cursor: pointer;
+    }
+    .search-input {
+      border: none;
+      outline: none;
+      height: 40px;
+      font-size: 0.95rem;
+      flex: 1;
+      padding: 0 10px;
+    }
+    .search-btn {
+      background-color: #febd69;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      width: 46px;
+      height: 40px;
+      font-size: 1.2rem;
+      color: #333;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .search-btn:hover { background-color: #f3a847; }
+    .search-wrapper { display: flex; flex: 1; max-width: 700px; border-radius: 4px; overflow: hidden; }
+
+    /* Nav links */
+    .nav-link-amazon { color: #fff; font-size: 0.85rem; white-space: nowrap; padding: 4px 8px; border: 1px solid transparent; }
+    .nav-link-amazon:hover { border-color: #fff; border-radius: 2px; color: #fff; }
+    .nav-link-amazon .small-text { font-size: 0.7rem; color: #ccc; display: block; line-height: 1.1; }
+    .nav-link-amazon .main-text { font-weight: 700; display: block; line-height: 1.3; }
+    .cart-count { background: #f08804; color: #fff; border-radius: 50%; font-size: 0.75rem; font-weight: 700; padding: 1px 5px; }
+
+    /* ── SUB-NAV ── */
+    .sub-nav { background-color: #232f3e; overflow-x: auto; white-space: nowrap; }
+    .sub-nav a { color: #fff; font-size: 0.85rem; padding: 8px 12px; display: inline-block; text-decoration: none; }
+    .sub-nav a:hover { border: 1px solid #fff; border-radius: 2px; }
+    .sub-nav a.active-link { border: 1px solid #fff; border-radius: 2px; }
+
+    /* ── HERO BANNER ── */
+    .hero-banner { position: relative; }
+    .hero-banner img { width: 100%; max-height: 500px; object-fit: cover; }
+    .hero-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(234,237,237,1) 0%, rgba(234,237,237,0) 100%);
+      height: 80px;
+    }
+
+    /* ── CARDS ── */
+    .deal-card { background: #fff; padding: 16px; border-radius: 4px; }
+    .deal-card h5 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .deal-card .see-more { color: #007185; font-size: 0.85rem; text-decoration: none; }
+    .deal-card .see-more:hover { text-decoration: underline; color: #c7511f; }
+    .deal-card img { width: 100%; object-fit: cover; }
+
+    /* Product grid images */
+    .product-img { width: 100%; height: 160px; object-fit: contain; }
+    .product-label { font-size: 0.8rem; color: #555; margin-top: 6px; }
+
+    /* ── FOOTER ── */
+    .footer-back-to-top { background-color: #37475a; color: #fff; text-align: center; padding: 14px; font-size: 0.9rem; cursor: pointer; }
+    .footer-back-to-top:hover { background-color: #485769; }
+    .footer-main { background-color: #232f3e; color: #ddd; padding: 40px 0 20px; }
+    .footer-main h6 { color: #fff; font-weight: 700; font-size: 0.9rem; margin-bottom: 12px; }
+    .footer-main a { color: #ddd; font-size: 0.82rem; text-decoration: none; display: block; margin-bottom: 6px; }
+    .footer-main a:hover { text-decoration: underline; }
+    .footer-bottom { background-color: #131921; color: #ddd; text-align: center; padding: 16px; font-size: 0.8rem; }
+    .footer-logo img { height: 38px; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     TOP NAVBAR
+══════════════════════════════════════════ -->
+<nav class="amazon-nav py-2">
+  <div class="container-fluid d-flex align-items-center gap-2 flex-wrap">
+
+    <!-- Logo -->
+    <a href="#" class="navbar-brand me-1">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" style="height:38px;filter:brightness(0) invert(1);" />
+    </a>
+
+    <!-- Deliver to -->
+    <a href="#" class="nav-link-amazon d-none d-md-block">
+      <span class="small-text"><i class="bi bi-geo-alt"></i> Deliver to</span>
+      <span class="main-text">India</span>
+    </a>
+
+    <!-- Search bar -->
+    <div class="search-wrapper flex-grow-1 mx-2">
+      <select class="search-category d-none d-md-block">
+        <option>All</option>
+        <option>Electronics</option>
+        <option>Books</option>
+        <option>Fashion</option>
+        <option>Home &amp; Kitchen</option>
+        <option>Mobiles</option>
+        <option>Toys</option>
+        <option>Sports</option>
+      </select>
+      <input type="text" class="search-input" placeholder="Search Amazon.in" />
+      <button class="search-btn"><i class="bi bi-search"></i></button>
+    </div>
+
+    <!-- Language -->
+    <a href="#" class="nav-link-amazon d-none d-lg-block">
+      <span class="small-text">&nbsp;</span>
+      <span class="main-text">EN <i class="bi bi-chevron-down" style="font-size:0.65rem;"></i></span>
+    </a>
+
+    <!-- Account -->
+    <a href="#" class="nav-link-amazon">
+      <span class="small-text">Hello, sign in</span>
+      <span class="main-text">Account &amp; Lists <i class="bi bi-chevron-down" style="font-size:0.65rem;"></i></span>
+    </a>
+
+    <!-- Returns -->
+    <a href="#" class="nav-link-amazon d-none d-lg-block">
+      <span class="small-text">Returns</span>
+      <span class="main-text">&amp; Orders</span>
+    </a>
+
+    <!-- Cart -->
+    <a href="#" class="nav-link-amazon d-flex align-items-end gap-1">
+      <div class="position-relative">
+        <i class="bi bi-cart3" style="font-size:1.8rem;"></i>
+        <span class="cart-count position-absolute" style="top:-4px;right:-6px;">0</span>
+      </div>
+      <span class="main-text">Cart</span>
+    </a>
+
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     SUB-NAV
+══════════════════════════════════════════ -->
+<div class="sub-nav">
+  <div class="container-fluid">
+    <a href="#" class="active-link"><i class="bi bi-list"></i> All</a>
+    <a href="#">Today's Deals</a>
+    <a href="#">Customer Service</a>
+    <a href="#">Registry</a>
+    <a href="#">Gift Cards</a>
+    <a href="#">Sell</a>
+    <a href="#">Electronics</a>
+    <a href="#">Fashion</a>
+    <a href="#">Prime</a>
+    <a href="#">Mobiles</a>
+    <a href="#">Home &amp; Kitchen</a>
+    <a href="#">Books</a>
+    <a href="#">Toys &amp; Games</a>
+    <a href="#">Sports</a>
+    <a href="#">Beauty</a>
+    <a href="#">New Releases</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HERO BANNER (Carousel)
+══════════════════════════════════════════ -->
+<div class="hero-banner">
+  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/Wireless/devjyoti/GW/Uber/Nov/d111b_Uber_EBB_GW_Header_3000x1200._CB573994415_.jpg"
+             class="d-block w-100" alt="Banner 1" style="max-height:500px;object-fit:cover;" />
+      </div>
+      <div class="carousel-item">
+        <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img23/Softlines/BAU/Jan23/GW_Header_3000x1200_01._CB598382649_.jpg"
+             class="d-block w-100" alt="Banner 2" style="max-height:500px;object-fit:cover;" />
+      </div>
+      <div class="carousel-item">
+        <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/Softlines/GW/Nov/3000x1200_Header-Shoe-Fest._CB611350736_.jpg"
+             class="d-block w-100" alt="Banner 3" style="max-height:500px;object-fit:cover;" />
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+  <div class="hero-overlay"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════════════ -->
+<div class="container-fluid px-3 px-md-4" style="margin-top:-60px; position:relative; z-index:10;">
+
+  <!-- ── ROW 1: Deal cards ── -->
+  <div class="row g-3 mb-3">
+
+    <!-- Sign-in card -->
+    <div class="col-6 col-md-3">
+      <div class="deal-card h-100">
+        <h5>Sign in for the best experience</h5>
+        <a href="#" class="btn btn-warning w-100 mt-2" style="background:#f0c14b;border-color:#a88734;font-size:0.85rem;">Sign in securely</a>
+        <p class="mt-2 mb-0" style="font-size:0.78rem;">New customer? <a href="#" style="color:#007185;">Start here.</a></p>
+      </div>
+    </div>
+
+    <!-- Deal of the Day -->
+    <div class="col-6 col-md-3">
+      <div class="deal-card h-100">
+        <h5>Deal of the Day</h5>
+        <img src="https://images-na.ssl-images-amazon.com/images/G/31/img21/Wireless/devjyoti/GW/Uber/Nov/d111b_Uber_EBB_GW_Header_3000x1200._CB573994415_.jpg"
+             alt="Deal" class="my-2" style="height:140px;object-fit:contain;width:100%;" />
+        <a href="#" class="see-more">See all deals</a>
+      </div>
+    </div>
+
+    <!-- Top picks in Electronics -->
+    <div class="col-6 col-md-3">
+      <div class="deal-card h-100">
+        <h5>Top picks in Electronics</h5>
+        <div class="row g-1 mt-1">
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71jG+e7roXL._AC_UL320_.jpg" alt="e1" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/61CGHv6kmWL._AC_UL320_.jpg" alt="e2" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71Swqqe7XAL._AC_UL320_.jpg" alt="e3" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/81aF3Ob-2KL._AC_UL320_.jpg" alt="e4" class="w-100" style="height:80px;object-fit:contain;" /></div>
+        </div>
+        <a href="#" class="see-more d-block mt-2">See more</a>
+      </div>
+    </div>
+
+    <!-- Fashion picks -->
+    <div class="col-6 col-md-3">
+      <div class="deal-card h-100">
+        <h5>Fashion picks under ₹599</h5>
+        <div class="row g-1 mt-1">
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71mEsHyzSCL._AC_UL320_.jpg" alt="f1" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71XfHPR36-L._AC_UL320_.jpg" alt="f2" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71Swqqe7XAL._AC_UL320_.jpg" alt="f3" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/61CGHv6kmWL._AC_UL320_.jpg" alt="f4" class="w-100" style="height:80px;object-fit:contain;" /></div>
+        </div>
+        <a href="#" class="see-more d-block mt-2">See more</a>
+      </div>
+    </div>
+
+  </div><!-- /row 1 -->
+
+  <!-- ── ROW 2: Category cards ── -->
+  <div class="row g-3 mb-3">
+
+    <div class="col-6 col-md-3">
+      <div class="deal-card h-100">
+        <h5>Mobiles under ₹15,000</h5>
+        <img src="https://images-na.ssl-images-amazon.com/images/I/71jG+e7roXL._AC_UL320_.jpg" alt="mobile" class="my-2" style="height:150px;object-fit:contain;width:100%;" />
+        <a href="#" class="see-more">Shop now</a>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <div class="deal-card h-100">
+        <h5>Home &amp; Kitchen essentials</h5>
+        <div class="row g-1 mt-1">
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71Swqqe7XAL._AC_UL320_.jpg" alt="h1" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/81aF3Ob-2KL._AC_UL320_.jpg" alt="h2" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/61CGHv6kmWL._AC_UL320_.jpg" alt="h3" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71mEsHyzSCL._AC_UL320_.jpg" alt="h4" class="w-100" style="height:80px;object-fit:contain;" /></div>
+        </div>
+        <a href="#" class="see-more d-block mt-2">See more</a>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <div class="deal-card h-100">
+        <h5>Books you'll love</h5>
+        <div class="row g-1 mt-1">
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71XfHPR36-L._AC_UL320_.jpg" alt="b1" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71jG+e7roXL._AC_UL320_.jpg" alt="b2" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/81aF3Ob-2KL._AC_UL320_.jpg" alt="b3" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71Swqqe7XAL._AC_UL320_.jpg" alt="b4" class="w-100" style="height:80px;object-fit:contain;" /></div>
+        </div>
+        <a href="#" class="see-more d-block mt-2">See more</a>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <div class="deal-card h-100">
+        <h5>Toys &amp; Games for kids</h5>
+        <div class="row g-1 mt-1">
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/61CGHv6kmWL._AC_UL320_.jpg" alt="t1" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71mEsHyzSCL._AC_UL320_.jpg" alt="t2" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71XfHPR36-L._AC_UL320_.jpg" alt="t3" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71jG+e7roXL._AC_UL320_.jpg" alt="t4" class="w-100" style="height:80px;object-fit:contain;" /></div>
+        </div>
+        <a href="#" class="see-more d-block mt-2">See more</a>
+      </div>
+    </div>
+
+  </div><!-- /row 2 -->
+
+  <!-- ── WIDE BANNER ── -->
+  <div class="row g-3 mb-3">
+    <div class="col-12">
+      <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/Softlines/BAU/Jan23/GW_Header_3000x1200_01._CB598382649_.jpg"
+           alt="Wide Banner" class="w-100 rounded" style="max-height:200px;object-fit:cover;" />
+    </div>
+  </div>
+
+  <!-- ── ROW 3: More category cards ── -->
+  <div class="row g-3 mb-3">
+
+    <div class="col-6 col-md-3">
+      <div class="deal-card h-100">
+        <h5>Sports &amp; Fitness</h5>
+        <div class="row g-1 mt-1">
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71Swqqe7XAL._AC_UL320_.jpg" alt="s1" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71jG+e7roXL._AC_UL320_.jpg" alt="s2" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/61CGHv6kmWL._AC_UL320_.jpg" alt="s3" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/81aF3Ob-2KL._AC_UL320_.jpg" alt="s4" class="w-100" style="height:80px;object-fit:contain;" /></div>
+        </div>
+        <a href="#" class="see-more d-block mt-2">See more</a>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <div class="deal-card h-100">
+        <h5>Beauty &amp; Personal Care</h5>
+        <div class="row g-1 mt-1">
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71mEsHyzSCL._AC_UL320_.jpg" alt="bp1" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71XfHPR36-L._AC_UL320_.jpg" alt="bp2" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71jG+e7roXL._AC_UL320_.jpg" alt="bp3" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71Swqqe7XAL._AC_UL320_.jpg" alt="bp4" class="w-100" style="height:80px;object-fit:contain;" /></div>
+        </div>
+        <a href="#" class="see-more d-block mt-2">See more</a>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <div class="deal-card h-100">
+        <h5>Laptops &amp; Accessories</h5>
+        <div class="row g-1 mt-1">
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/81aF3Ob-2KL._AC_UL320_.jpg" alt="l1" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/61CGHv6kmWL._AC_UL320_.jpg" alt="l2" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71mEsHyzSCL._AC_UL320_.jpg" alt="l3" class="w-100" style="height:80px;object-fit:contain;" /></div>
+          <div class="col-6"><img src="https://images-na.ssl-images-amazon.com/images/I/71XfHPR36-L._AC_UL320_.jpg" alt="l4" class="w-100" style="height:80px;object-fit:contain;" /></div>
+        </div>
+        <a href="#" class="see-more d-block mt-2">See more</a>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <div class="deal-card h-100">
+        <h5>Amazon Pay offers</h5>
+        <img src="https://images-na.ssl-images-amazon.com/images/I/71jG+e7roXL._AC_UL320_.jpg" alt="pay" class="my-2" style="height:150px;object-fit:contain;width:100%;" />
+        <a href="#" class="see-more">Explore offers</a>
+      </div>
+    </div>
+
+  </div><!-- /row 3 -->
+
+  <!-- ── BEST SELLERS HORIZONTAL SCROLL ── -->
+  <div class="row g-3 mb-3">
+    <div class="col-12">
+      <div class="deal-card">
+        <h5 class="mb-3">Best Sellers in Electronics</h5>
+        <div class="d-flex gap-3 overflow-auto pb-2">
+
+          <!-- Product cards -->
+          <div class="flex-shrink-0" style="width:160px;">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/71jG+e7roXL._AC_UL320_.jpg" alt="p1" style="width:100%;height:140px;object-fit:contain;" />
+            <p class="product-label">boAt Rockerz 450 Bluetooth Headphone</p>
+            <p class="mb-0" style="font-size:0.85rem;"><span style="color:#B12704;font-weight:700;">₹1,299</span></p>
+            <div style="color:#f0a500;font-size:0.8rem;">★★★★☆ <span style="color:#555;">(12,450)</span></div>
+          </div>
+
+          <div class="flex-shrink-0" style="width:160px;">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/61CGHv6kmWL._AC_UL320_.jpg" alt="p2" style="width:100%;height:140px;object-fit:contain;" />
+            <p class="product-label">Redmi 12C (Royal Blue, 4GB RAM)</p>
+            <p class="mb-0" style="font-size:0.85rem;"><span style="color:#B12704;font-weight:700;">₹8,499</span></p>
+            <div style="color:#f0a500;font-size:0.8rem;">★★★★☆ <span style="color:#555;">(8,230)</span></div>
+          </div>
+
+          <div class="flex-shrink-0" style="width:160px;">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/71Swqqe7XAL._AC_UL320_.jpg" alt="p3" style="width:100%;height:140px;object-fit:contain;" />
+            <p class="product-label">Fire-Boltt Ninja Call Pro Smart Watch</p>
+            <p class="mb-0" style="font-size:0.85rem;"><span style="color:#B12704;font-weight:700;">₹1,799</span></p>
+            <div style="color:#f0a500;font-size:0.8rem;">★★★★★ <span style="color:#555;">(5,100)</span></div>
+          </div>
+
+          <div class="flex-shrink-0" style="width:160px;">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/81aF3Ob-2KL._AC_UL320_.jpg" alt="p4" style="width:100%;height:140px;object-fit:contain;" />
+            <p class="product-label">Noise ColorFit Pro 4 Alpha Smart Watch</p>
+            <p class="mb-0" style="font-size:0.85rem;"><span style="color:#B12704;font-weight:700;">₹2,499</span></p>
+            <div style="color:#f0a500;font-size:0.8rem;">★★★★☆ <span style="color:#555;">(3,780)</span></div>
+          </div>
+
+          <div class="flex-shrink-0" style="width:160px;">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/71mEsHyzSCL._AC_UL320_.jpg" alt="p5" style="width:100%;height:140px;object-fit:contain;" />
+            <p class="product-label">Zebronics Zeb-Sound Bomb Q3 TWS</p>
+            <p class="mb-0" style="font-size:0.85rem;"><span style="color:#B12704;font-weight:700;">₹799</span></p>
+            <div style="color:#f0a500;font-size:0.8rem;">★★★★☆ <span style="color:#555;">(9,200)</span></div>
+          </div>
+
+          <div class="flex-shrink-0" style="width:160px;">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/71XfHPR36-L._AC_UL320_.jpg" alt="p6" style="width:100%;height:140px;object-fit:contain;" />
+            <p class="product-label">Samsung Galaxy Buds2 Pro</p>
+            <p class="mb-0" style="font-size:0.85rem;"><span style="color:#B12704;font-weight:700;">₹11,990</span></p>
+            <div style="color:#f0a500;font-size:0.8rem;">★★★★★ <span style="color:#555;">(2,340)</span></div>
+          </div>
+
+        </div>
+        <a href="#" class="see-more d-block mt-2">See all best sellers</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PRIME BANNER ── -->
+  <div class="row g-3 mb-3">
+    <div class="col-12">
+      <div class="deal-card d-flex align-items-center gap-3 flex-wrap" style="background:linear-gradient(135deg,#232f3e,#37475a);">
+        <div>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Amazon_Prime_Logo.svg" alt="Prime" style="height:50px;filter:brightness(0) invert(1);" />
+        </div>
+        <div class="text-white">
+          <h5 class="mb-1" style="color:#fff;">Unlimited FREE fast delivery, video streaming &amp; more</h5>
+          <p class="mb-0" style="font-size:0.85rem;color:#ccc;">Prime members enjoy exclusive deals, early access to sales, and ad-free music.</p>
+        </div>
+        <a href="#" class="btn btn-warning ms-auto" style="background:#f0c14b;border-color:#a88734;white-space:nowrap;">Try Prime FREE</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container-fluid -->
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+
+<!-- Back to top -->
+<div class="footer-back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  Back to top
+</div>
+
+<!-- Footer links -->
+<div class="footer-main">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-6 col-md-3">
+        <h6>Get to Know Us</h6>
+        <a href="#">About Amazon</a>
+        <a href="#">Careers</a>
+        <a href="#">Press Releases</a>
+        <a href="#">Amazon Science</a>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <h6>Connect with Us</h6>
+        <a href="#"><i class="bi bi-facebook me-1"></i>Facebook</a>
+        <a href="#"><i class="bi bi-twitter-x me-1"></i>Twitter</a>
+        <a href="#"><i class="bi bi-instagram me-1"></i>Instagram</a>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <h6>Make Money with Us</h6>
+        <a href="#">Sell on Amazon</a>
+        <a href="#">Sell under Amazon Accelerator</a>
+        <a href="#">Amazon Associates</a>
+        <a href="#">Fulfilment by Amazon</a>
+        <a href="#">Advertise Your Products</a>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <h6>Let Us Help You</h6>
+        <a href="#">COVID-19 and Amazon</a>
+        <a href="#">Your Account</a>
+        <a href="#">Returns Centre</a>
+        <a href="#">100% Purchase Protection</a>
+        <a href="#">Amazon App Download</a>
+        <a href="#">Help</a>
+      </div>
+
+    </div>
+
+    <hr style="border-color:#3a4553;margin:30px 0 20px;" />
+
+    <!-- Footer logo + locale -->
+    <div class="d-flex align-items-center justify-content-center gap-3 flex-wrap">
+      <div class="footer-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" style="filter:brightness(0) invert(1);height:32px;" />
+      </div>
+      <a href="#" class="btn btn-outline-secondary btn-sm text-white" style="border-color:#555;font-size:0.78rem;">
+        <i class="bi bi-globe me-1"></i>English
+      </a>
+      <a href="#" class="btn btn-outline-secondary btn-sm text-white" style="border-color:#555;font-size:0.78rem;">
+        <i class="bi bi-currency-rupee"></i> INR - Indian Rupee
+      </a>
+      <a href="#" class="btn btn-outline-secondary btn-sm text-white" style="border-color:#555;font-size:0.78rem;">
+        <i class="bi bi-geo-alt me-1"></i>India
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer bottom -->
+<div class="footer-bottom">
+  <div class="d-flex flex-wrap justify-content-center gap-3 mb-2">
+    <a href="#" style="color:#ddd;font-size:0.78rem;text-decoration:none;">Conditions of Use &amp; Sale</a>
+    <a href="#" style="color:#ddd;font-size:0.78rem;text-decoration:none;">Privacy Notice</a>
+    <a href="#" style="color:#ddd;font-size:0.78rem;text-decoration:none;">Interest-Based Ads Notice</a>
+  </div>
+  <p class="mb-0" style="color:#999;font-size:0.75rem;">© 1996–2026, Amazon.com, Inc. or its affiliates</p>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

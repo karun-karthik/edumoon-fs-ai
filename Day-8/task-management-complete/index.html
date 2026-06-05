@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Task Management</title>
+        <link href="style.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>Task Managemnt</h1>
+                <div class="task-input">
+                    <input type="text" id="taskInput" placeholder="Some task!">
+                    <button id="addTaskBtn">Add</button>
+                </div>
+            </header>
+
+            <main>
+                <div class="filters">
+                    <select id="filterTasks">
+                        <option value="all">All tasks</option>
+                        <option value="completed">Completed</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                    <input type="text" id="searchTask" placeholder="Search task!"/>
+                </div>
+            </main>
+
+            <ul id="tasksList" class="task-list">
+                <!-- dynamically add tasks -->
+            </ul>
+
+            <footer>
+                <div class="task-info">
+                    <span id="taskCount">0 tasks</span>
+                    <button id="clear-completed">Clear Completed</button>
+                </div>
+            </footer>
+        </div>
+
+        <div id="taskTemplate">
+            <li class="task-item">
+                <input type="checkbox" class="task-checkbox">
+                <span class="task-text"></span>
+                <button class="delete-task">X</button>
+            </li>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
