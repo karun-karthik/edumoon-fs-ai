@@ -2,7 +2,7 @@ import './components/style.css'
 import Login from "./components/Login"
 import SideBar from "./components/SideBar"
 import Signup from './components/Signup'
-import { Route, Routes } from 'react-router'
+import { Route, Routes, Navigate } from 'react-router'
 import Dashboard from './components/Dashboard'
 import Accounts from './components/Accounts'
 import Transactions from './components/Transactions'
@@ -17,6 +17,7 @@ function App() {
       <SideBar />
       <div className="main-content">
         <Routes>
+          <Route path='/' element={<Navigate to="/login" replace />} />
           <Route path='home' element={<ProtectedRoute/>}>
             <Route index element={<Dashboard />} />
             <Route path='accounts' element={<Accounts />} />

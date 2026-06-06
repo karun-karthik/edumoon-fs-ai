@@ -7,7 +7,6 @@ interface Account {
     name: string;
     type: string;
     balance: number;
-    email: string;
 }
 
 interface DropdownPosition {
