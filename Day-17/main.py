@@ -37,7 +37,7 @@
 # Datastructures
 # print("List _________")
 
-# my_list = [1, "2", {"a":"b"}, 4.5, 5]
+my_list = [1, "2", {"a":"b"}, 4.5, 5]
 
 # for element in my_list:
 #     print(element)
@@ -134,8 +134,8 @@
 # print(set1.symmetric_difference(set2))  # Symmetric difference of two sets; everything from set1, set2 excluding the common elements
 # print(set1.union(set2).difference(set1.intersection(set2)))
 
-print("String _________")
-my_string = "Hello, World!"
+# print("String _________")
+# my_string = "Hello, o World!"
 # print(my_string)
 # print(my_string[0])  # Accessing the first character
 # print(my_string[7:12])  # Slicing the string from index 7 to 11
@@ -144,8 +144,8 @@ my_string = "Hello, World!"
 # print(my_string.upper())  # Converting to uppercase
 # print(my_string.replace("d!", "Python"))  # Replacing a substring
 # print(my_string.split(", "))  # Splitting the string into a list
-print(my_string.find("World"))  # Finding the index of a substring/target from main string
-print(my_string.count("o"))  # Counting occurrences of a character
+# print(my_string.find("World"))  # Finding the index of a substring/target from main string
+# print(my_string.count("o"))  # Counting occurrences of a character, frequency
 # print(my_string.startswith("Hello"))  # Checking if the string starts with a substring
 # print(my_string.endswith("!"))  # Checking if the string ends with a substring
 # test_string = "  Hello, World!  "
@@ -156,26 +156,31 @@ print(my_string.count("o"))  # Counting occurrences of a character
 # name = "John"
 # age = 30
 # print(f"My name is {name} and I am {age} years old.")  # Formatted string using f-string
-# # console.log(`My name is ${name} and I am ${age} years old.`)  # Equivalent in JavaScript
-# print("My name is {} and I am {} years old.".format(age, name))  # Using format method
+# console.log(`My name is ${name} and I am ${age} years old.`)  # Equivalent in JavaScript
+# print("My name is {} and I am {} years old.".format(name, age))  # Using format method
 # print("My name is %s and I am %d years old." % (name, age))  # Using old-style formatting
 
-# # print(my_list[10])
-# try:
-#     print(my_list[10])  # This will raise an IndexError
-# except IndexError as e:
+# print(my_list[10])
+try:
+    print(my_list[10])  # This will raise an IndexError
+except IndexError as e:
+    # error handling
+    print(f"An error occurred: {e}")
+
+print("Hey")
+
+# try {
+#  exception possible code
+# } catch (Exception e) {
 #     print(f"An error occurred: {e}")
-# # try {
-# # } catch (Exception e) {
-# #     print(f"An error occurred: {e}")
-# # }
+# }
 
 # print("End of the program.")
 
-# # Example of a custom exception
-# class CustomError(Exception):
-#     """Custom exception class for demonstration purposes."""
-#     pass
+# Example of a custom exception
+class CustomError(Exception):
+    """Custom exception class for demonstration purposes."""
+    pass
 
-# # throw CustomError("This is a custom error message.")
-# raise CustomError("This is a custom error message.")
+# throw CustomError("This is a custom error message.")
+raise CustomError("This is a custom error message.")
