@@ -1,6 +1,6 @@
 from typing import List, Optional
-from pydantic import BaseModel
-
+from pydantic import BaseModel, constr, Field
+import httpx
 
 class Item(BaseModel):
     id: int
@@ -15,11 +15,11 @@ class ItemRepository:
     def __init__(self):
         """Initialize repository with default items."""
         self.items: List[Item] = [
-            Item(id=1, name="Python Book", description="Comprehensive guide to Python programming", price=29.99),
-            Item(id=2, name="JavaScript Guide", description="Modern JavaScript best practices and patterns", price=24.99),
-            Item(id=3, name="FastAPI Tutorial", description="Complete FastAPI framework tutorial with examples", price=34.99),
-            Item(id=4, name="Web Development Course", description="Full-stack web development from basics to advanced", price=49.99),
-            Item(id=5, name="Database Design", description="Database design patterns and optimization techniques", price=39.99),
+            Item(id=1, name="Python Book", description="Python Cookbook", price=20.00),
+            Item(id=2, name="JavaScript Guide",  description="JS Cookbook", price=10.00),
+            Item(id=3, name="FastAPI Tutorial",  description="FastAPI Cookbook", price=40.00),
+            Item(id=4, name="Web Development Course",  description="WebDev Cookbook", price=30.00),
+            Item(id=5, name="Database Design",  description="DB Cookbook", price=50.00),
         ]
         self._next_id = 6  # Track the next ID for new items
     
@@ -53,8 +53,6 @@ class ItemRepository:
         
         Args:
             name: The name of the new item
-            description: The description of the new item
-            price: The price of the new item
             
         Returns:
             The newly created item
@@ -64,22 +62,22 @@ class ItemRepository:
         self._next_id += 1
         return new_item
     
-    def update_item(self, item_id: int, **kwargs) -> Optional[Item]:
+    def update_item(self, item_id: int, name: str, description: str, price: float) -> Optional[Item]:
         """
         Update an existing item.
         
         Args:
             item_id: The ID of the item to update
-            **kwargs: Fields to update (name, description, price)
+            name: The new name for the item
             
         Returns:
             The updated item if found, None otherwise
         """
         item = self.get_item(item_id)
         if item:
-            for key, value in kwargs.items():
-                if value is not None and hasattr(item, key):
-                    setattr(item, key, value)
+            item.name = name
+            item.description = description
+            item.price = price
             return item
         return None
     
@@ -98,3 +96,9 @@ class ItemRepository:
                 self.items.pop(i)
                 return True
         return False
+
+
+async def fetch_data(url):
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url)
+        return response.json()   

@@ -7,7 +7,7 @@ class Settings(BaseSettings):
         "A simple fast api project for demo"
     )
     app_version: str = "0.1.0"
-    external_url: HttpUrl = "https://bored-api.appbrewery.com/filter?type=education"
+    external_url: str = "https://bored-api.appbrewery.com/filter?type=education"
 
     class Config:
         env_file = ".env"

@@ -3,22 +3,22 @@ from typing import List
 from .schemas import ItemCreate, ItemUpdate, ItemResponse
 from .service import ItemRepository
 
-router = APIRouter(prefix="/api", tags=["items apis"])
+router = APIRouter(prefix="/items", tags=["items apis"])
 
 # Initialize the repository
 item_repo = ItemRepository()
 
 
-@router.get("/", summary="API health check")
+@router.get("/health", summary="API health check")
 def root() -> dict[str, str]:
     return {"message": "FastAPI Crud is running", "version": "0.0.1"}
 
 
-@router.get("/items", response_model=List[ItemResponse], summary="Listing all the items with pagination")
+@router.get("/", response_model=List[ItemResponse], summary="Listing all the items with pagination")
 def list_items(
     skip: int = Query(0, ge=0, description="Number of items to skip"),
     limit: int = Query(10, ge=1, le=100, description="Number of items to return"),
-) -> List[ItemResponse]:
+):
 
     """
     Get a paginated list of all items.
@@ -30,7 +30,7 @@ def list_items(
     return all_items[skip : skip + limit]
 
 
-@router.get("/items/{item_id}", response_model=ItemResponse, summary="Get a specific item by ID")
+@router.get("/{item_id}", response_model=ItemResponse, summary="Get a specific item by ID")
 def get_item(item_id: int) -> ItemResponse:
     """Get a specific item by its ID."""
     item = item_repo.get_item(item_id)
@@ -39,7 +39,7 @@ def get_item(item_id: int) -> ItemResponse:
     return item
 
 
-@router.post("/items", response_model=ItemResponse, status_code=201, summary="Create a new item")
+@router.post("/", response_model=ItemResponse, status_code=201, summary="Create a new item")
 def create_item(item_create: ItemCreate) -> ItemResponse:
     """
     Create a new item.
@@ -57,7 +57,7 @@ def create_item(item_create: ItemCreate) -> ItemResponse:
     return new_item
 
 
-@router.put("/items/{item_id}", response_model=ItemResponse, summary="Update an item by ID")
+@router.put("/{item_id}", response_model=ItemResponse, summary="Update an item by ID")
 def update_item(item_id: int, item_update: ItemUpdate) -> ItemResponse:
     """
     Update an existing item.
@@ -75,7 +75,7 @@ def update_item(item_id: int, item_update: ItemUpdate) -> ItemResponse:
     return updated_item
 
 
-@router.delete("/items/{item_id}", status_code=204, summary="Delete an item by ID")
+@router.delete("/{item_id}", status_code=204, summary="Delete an item by ID")
 def delete_item(item_id: int):
     """Delete an item by its ID."""
     if not item_repo.delete_item(item_id):
