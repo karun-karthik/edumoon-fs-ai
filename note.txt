@@ -1,0 +1,6 @@
+1. Finance Tracker
+2. Student Collaboration Hub
+3. Web scraping 
+4. Artical Summarizer 
+5. AI Knowledge Assistant
+6. Portfolio (Prompt Engineering)
