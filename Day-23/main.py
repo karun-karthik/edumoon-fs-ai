@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 import os
 from dotenv import load_dotenv
 from user_routes import user_router
+from accounts_routes import accounts_router
 from db import database
 
 # Load environment variables
@@ -12,6 +13,7 @@ MONGO_URI = os.getenv("MONGO_URI", "your_srv_connection_url_here")
 
 app = FastAPI()
 app.include_router(user_router)
+app.include_router(accounts_router)
 
 
 @app.on_event("startup")
