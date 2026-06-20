@@ -28,8 +28,9 @@ class AccountsRepository:
         Returns:
             Created account with _id
         """
-        if account_data["_id"] is not None:
+        if "_id" in account_data:
             del account_data["_id"]
+        
         collection = AccountsRepository.get_collection()
         result = collection.insert_one(account_data)
         account_data["_id"] = str(result.inserted_id)
@@ -108,8 +109,9 @@ class AccountsRepository:
             Updated account document or None if not found
         """
         try:
-            if update_data["_id"] is not None:
+            if "_id" in update_data:
                 del update_data["_id"]
+            
             collection = AccountsRepository.get_collection()
             result = collection.find_one_and_update(
                 {"_id": ObjectId(account_id)},
