@@ -4,7 +4,6 @@ import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router';
 import AuthLayout from './AuthLayout';
 import { userLogin } from '../utils/axios-utils';
-import { useJwt } from "react-jwt";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -26,8 +25,6 @@ const Login = () => {
 
         userLogin({email, password}).then((response: any) => {
             localStorage.setItem("token", response.data.token);
-            // const { decodedToken } = useJwt(response.data.token);
-            // localStorage.setItem("userInfo", JSON.stringify(decodedToken))
             navigate("/home");
         })
         .catch(err => {
