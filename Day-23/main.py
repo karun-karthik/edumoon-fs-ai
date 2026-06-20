@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
 from user_routes import user_router
@@ -14,6 +15,14 @@ MONGO_URI = os.getenv("MONGO_URI", "your_srv_connection_url_here")
 app = FastAPI()
 app.include_router(user_router)
 app.include_router(accounts_router)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "https://finance-management-em.netlify.app"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.on_event("startup")
