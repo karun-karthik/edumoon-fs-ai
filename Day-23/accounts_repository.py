@@ -28,8 +28,7 @@ class AccountsRepository:
         Returns:
             Created account with _id
         """
-        if "_id" in account_data:
-            del account_data["_id"]
+        account_data.pop("_id", None)
         
         collection = AccountsRepository.get_collection()
         result = collection.insert_one(account_data)
@@ -109,8 +108,8 @@ class AccountsRepository:
             Updated account document or None if not found
         """
         try:
-            if "_id" in update_data:
-                del update_data["_id"]
+            # Remove _id if present (never update MongoDB's _id)
+            update_data.pop("_id", None)
             
             collection = AccountsRepository.get_collection()
             result = collection.find_one_and_update(

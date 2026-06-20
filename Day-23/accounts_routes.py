@@ -68,6 +68,9 @@ def create_account(
         if not email or not user_id:
             raise HTTPException(status_code=401, detail="Invalid token: missing email or user_id")
         
+        # Remove _id if present (let MongoDB generate it)
+        account.pop("_id", None)
+        
         # Validate required fields
         required_fields = ["name", "type", "balance"]
         missing_fields = [field for field in required_fields if field not in account]
@@ -204,6 +207,9 @@ def update_account(
         # Verify account belongs to the user
         if account.get("userId") != user_id:
             raise HTTPException(status_code=403, detail="Unauthorized: account does not belong to user")
+        
+        # Remove _id if present (never update MongoDB's _id)
+        update_data.pop("_id", None)
         
         # Validate balance if provided
         if "balance" in update_data:
