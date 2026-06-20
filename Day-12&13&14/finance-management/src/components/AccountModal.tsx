@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
 interface Account {
-    id: string;
+    _id: string;
     name: string;
     type: string;
     balance: number;
@@ -56,7 +56,7 @@ const AccountModal = ({ show, onHide, onSave, editingAccount }: AccountModalProp
     const handleSave = () => {
         if (validateForm()) {
             const newAccount: Account = {
-                id: editingAccount?.id || Date.now().toString(),
+                _id: editingAccount?._id || '',
                 name: accountName,
                 type: accountType,
                 balance: parseFloat(currentBalance),

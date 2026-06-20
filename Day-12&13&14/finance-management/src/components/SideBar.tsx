@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 const SideBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const token = localStorage.getItem("token");
     const [userInfo, setUserInfo] = useState(() => JSON.parse(localStorage.getItem("userInfo") || "{}"));
 
     // Listen for profile updates
@@ -24,12 +25,12 @@ const SideBar = () => {
     }
 
     const handleLogout = () => {
-        localStorage.removeItem("userInfo");
+        localStorage.removeItem("token");
         navigate("/login");
     };
 
     // Only show sidebar on authenticated routes
-    if (!userInfo.email) {
+    if (!token) {
         return null;
     }
 

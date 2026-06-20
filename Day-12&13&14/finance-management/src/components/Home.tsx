@@ -7,7 +7,7 @@ const Home = () => {
         <>
         <h1>HOME</h1>
         <Button className="btn btn-danger" onClick={() => {
-            localStorage.removeItem("userInfo")
+            localStorage.removeItem("token")
             navigator("/login")
         }}>Logout</Button>
         </>

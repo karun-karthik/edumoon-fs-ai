@@ -3,6 +3,8 @@ import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router';
 import AuthLayout from './AuthLayout';
+import { userLogin } from '../utils/axios-utils';
+import { useJwt } from "react-jwt";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -21,30 +23,21 @@ const Login = () => {
         }
         
         setLoading(true);
-        
-        const usersData = localStorage.getItem("users");
-        if (!usersData) {
-            alert("No users found");
-            setLoading(false);
-            return;
-        }
-        
-        const users = JSON.parse(usersData);
-        const userInfo = users.find((user: { email: string; password: string }) => user.email === email);
-        
-        if (!userInfo) {
-            alert("User not found");
-            setLoading(false);
-            return;
-        }
-        
-        if (userInfo.password === password) {
-            localStorage.setItem("userInfo", JSON.stringify(userInfo))
-            navigate("/home")
-        } else {
+
+        userLogin({email, password}).then((response: any) => {
+            localStorage.setItem("token", response.data.token);
+            // const { decodedToken } = useJwt(response.data.token);
+            // localStorage.setItem("userInfo", JSON.stringify(decodedToken))
+            navigate("/home");
+        })
+        .catch(err => {
+            console.error(err);
             alert("Invalid password");
+        })
+        .finally(() => {
+            console.log("Login API is complete");
             setLoading(false);
-        }
+        });
     }
 
     return (

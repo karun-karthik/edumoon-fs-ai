@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from 'react-bootstrap';
 import AccountModal from './AccountModal';
+import { createUserAccount, getUserAccounts, updateUserAccount } from '../utils/axios-utils';
 
 interface Account {
-    id: string;
+    _id: string;
     name: string;
     type: string;
     balance: number;
@@ -22,18 +23,20 @@ const AccountsListing = () => {
     const [dropdownPos, setDropdownPos] = useState<DropdownPosition>({ top: 0, left: 0 });
     const dropdownRef = useRef<HTMLDivElement>(null);
 
+    const getAccounts = () => {
+        getUserAccounts().then(response => {
+            setAccounts(response.data.accounts);
+        }).catch(err => {
+            console.log(err);
+        }).finally(() => {
+            console.log("Accounts API resolved");
+        })
+    }
+
     // Load accounts from localStorage on mount
     useEffect(() => {
-        const savedAccounts = localStorage.getItem('accounts');
-        if (savedAccounts) {
-            setAccounts(JSON.parse(savedAccounts));
-        }
+        getAccounts();
     }, []);
-
-    // Save accounts to localStorage whenever they change
-    useEffect(() => {
-        localStorage.setItem('accounts', JSON.stringify(accounts));
-    }, [accounts]);
 
     const handleShowModal = () => {
         setEditingAccount(null);
@@ -48,7 +51,7 @@ const AccountsListing = () => {
 
     const handleDeleteAccount = (id: string) => {
         if (window.confirm('Are you sure you want to delete this account?')) {
-            setAccounts(accounts.filter(account => account.id !== id));
+            setAccounts(accounts.filter(account => account._id !== id));
             setShowActionsMenu(null);
         }
     };
@@ -56,10 +59,24 @@ const AccountsListing = () => {
     const handleSaveAccount = (account: Account) => {
         if (editingAccount) {
             // Update existing account
-            setAccounts(accounts.map(acc => acc.id === account.id ? account : acc));
+            updateUserAccount(account)
+            .then(response => {
+                if (response.data.status == "success") {
+                    getAccounts();
+                } else {
+                    alert("Failed to update account!");
+                }
+            }).finally(() => console.log("Account put API resolved"));
+            
         } else {
             // Add new account
-            setAccounts([...accounts, account]);
+            createUserAccount(account).then(response => {
+                if (response.data.status == "success") {
+                    getAccounts();
+                } else {
+                    alert("Failed to create account!");
+                }
+            }).finally(() => console.log("Account create API resolved"));
         }
         setShowModal(false);
     };
@@ -140,7 +157,7 @@ const AccountsListing = () => {
                         </thead>
                         <tbody>
                             {accounts.map((account) => (
-                                <tr key={account.id} className="table-body-row">
+                                <tr key={account._id} className="table-body-row">
                                     <td className="table-body-cell">{account.name}</td>
                                     <td className="table-body-cell">{account.type}</td>
                                     <td className="table-body-cell balance-cell">{formatCurrency(account.balance)}</td>
@@ -148,11 +165,11 @@ const AccountsListing = () => {
                                         <div className="actions-menu-container" ref={dropdownRef}>
                                             <button
                                                 className="actions-btn"
-                                                onClick={(e) => toggleActionsMenu(account.id, e)}
+                                                onClick={(e) => toggleActionsMenu(account._id, e)}
                                             >
                                                 ⋮
                                             </button>
-                                            {showActionsMenu === account.id && (
+                                            {showActionsMenu === account._id && (
                                                 <div
                                                     className="actions-dropdown"
                                                     style={{
@@ -168,7 +185,7 @@ const AccountsListing = () => {
                                                     </button>
                                                     <button
                                                         className="action-item delete-action"
-                                                        onClick={() => handleDeleteAccount(account.id)}
+                                                        onClick={() => handleDeleteAccount(account._id)}
                                                     >
                                                         Delete
                                                     </button>
