@@ -106,6 +106,8 @@ class AccountsRepository:
             Updated account document or None if not found
         """
         try:
+            if update_data["_id"] is not None:
+                del update_data["_id"]
             collection = AccountsRepository.get_collection()
             result = collection.find_one_and_update(
                 {"_id": ObjectId(account_id)},
