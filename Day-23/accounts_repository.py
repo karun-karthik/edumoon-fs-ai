@@ -28,6 +28,8 @@ class AccountsRepository:
         Returns:
             Created account with _id
         """
+        if account_data["_id"] is not None:
+            del account_data["_id"]
         collection = AccountsRepository.get_collection()
         result = collection.insert_one(account_data)
         account_data["_id"] = str(result.inserted_id)
