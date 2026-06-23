@@ -14,7 +14,7 @@ def create_jwt_token(data: dict) -> str:
 
 def decode_jwt_token(token:str) -> dict:
     try:
-        payload = jwt.decode(token, KEY, algorithm="HS256")
+        payload = jwt.decode(token, KEY, algorithms=["HS256"])
         return payload
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="Token has expired")
@@ -23,11 +23,13 @@ def decode_jwt_token(token:str) -> dict:
 
 def validate_jwt_token(token:str) -> dict:
     try:
-        jwt.decode(token, KEY, algorithm="HS256")
+        jwt.decode(token, KEY, algorithms=["HS256"])
         return True
-    except jwt.ExpiredSignatureError:
+    except jwt.ExpiredSignatureError as e:
+        print(e)
         return False
-    except jwt.InvalidTokenError:
+    except jwt.InvalidTokenError as e:
+        print(e)
         return False
 
 def get_hashed_password(password:str) -> str:

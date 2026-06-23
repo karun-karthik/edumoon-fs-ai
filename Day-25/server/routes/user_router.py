@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from models.user import User, UserLogin
+from models.user import User, UserLogin, UpdateUser
 from db import database
 from utils import get_hashed_password, check_password, create_jwt_token
 from uuid import uuid4
@@ -50,4 +50,31 @@ async def get_users():
         "status": "success",
         "message": "Users list fetched successfully!",
         "data": users
+    }
+
+@router.put("/{user_id}")
+async def update_user(user_id: str, request: UpdateUser):
+    user = database.get_collection("users").find_one({"user_id": user_id})
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found!")
+    if (not request.name) or (not request.bio) or (not request.name):
+        raise HTTPException(status_code=400, detail="User details required!")
+    update_user = {}
+    if request.name:
+        update_user["name"] = request.name
+    if request.bio:
+        update_user["bio"] = request.bio
+    if request.email:
+        update_user["email"] = request.email
+    
+    latest_user = database.get_collection("users").find_one_and_update(
+        {"user_id": user_id},
+        {"$set": update_user},
+        return_document=True
+    )
+
+    return {
+        "status": "success",
+        "message": "User details updated successfully!",
+        "data": latest_user
     }
