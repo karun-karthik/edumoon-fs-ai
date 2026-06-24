@@ -204,7 +204,7 @@ const Home = () => {
     };
 
     const PostCard = ({ post }) => {
-        const authorName = post.created_by || post.author || 'Student';
+        const authorName = post.created_by;
         const isExpanded = expandedPostId === post.post_id;
         const preview = post.content?.length > 200 && !isExpanded
             ? post.content.substring(0, 200) + '...'

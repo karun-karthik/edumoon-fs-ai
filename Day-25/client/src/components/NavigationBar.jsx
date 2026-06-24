@@ -4,7 +4,6 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { Link, useLocation } from 'react-router-dom';
 
 function NavigationBar() {
-  const isAuthenticated = localStorage.getItem('token') != null;
   const location = useLocation();
 
   const handleLogout = () => {
@@ -19,7 +18,7 @@ function NavigationBar() {
           StudentHub
         </Navbar.Brand>
 
-        {isAuthenticated && (
+        {(
           <div className="d-flex align-items-center mx-auto gap-1">
             <Link
               to="/"
@@ -41,17 +40,7 @@ function NavigationBar() {
         )}
 
         <div className="d-flex align-items-center gap-2 ms-auto">
-          {!isAuthenticated && (
-            <>
-              <Link to="/login" className="btn btn-primary btn-sm fw-semibold px-3">
-                Log In
-              </Link>
-              <Link to="/signup" className="btn btn-success btn-sm fw-semibold px-3">
-                Sign Up
-              </Link>
-            </>
-          )}
-          {isAuthenticated && (
+          {(
             <Dropdown align="end">
               <Dropdown.Toggle
                 variant="light"
