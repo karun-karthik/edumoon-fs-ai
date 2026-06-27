@@ -111,7 +111,8 @@ class ConnectionManager:
 manager = ConnectionManager()
 
 @app.websocket("/ws/chat")
-async def websocket_endpoint(websocket: WebSocket, token: str):
+async def websocket_endpoint(websocket: WebSocket):
+    token = websocket.query_params.get("token")
     if not validate_jwt_token(token):
         await websocket.close(code=1008)
         return
