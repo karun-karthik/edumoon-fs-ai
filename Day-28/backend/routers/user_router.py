@@ -48,4 +48,11 @@ def search_user(q: str, request: Request):
         "username": {"$regex": q, "$options": "i"}
     }, {"_id": 0, "password": 0}))
 
-    return [{"id": str(user["user_id"]), "username": user["username"]} for user in users]
+    return [{
+            "id": str(user["user_id"]),
+            "username": user["username"],
+            "friends": user["friends"],
+            "sent_requests": user["sent_requests"],
+            "received_requests": user["received_requests"]
+        }
+        for user in users]
