@@ -1,5 +1,7 @@
 import { useState, useRef } from 'react'
-import { Avatar, Badge, Box, Button, Center, Flex, Group, Paper, ScrollArea, Stack, Text, TextInput } from "@mantine/core"
+import { Avatar, Badge, Box, Button, Center, Flex, Group, Paper, ScrollArea, Stack, Text, TextInput, ActionIcon } from "@mantine/core"
+import { useMediaQuery } from "@mantine/hooks"
+import { ArrowLeft } from "lucide-react"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import api from "./api";
@@ -14,6 +16,8 @@ export default function ChatLayout() {
 
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
+
+  const isMobile = useMediaQuery('(max-width: 768px)')
 
   const ws = useRef(null)
   const activeChatRef = useRef(null)
@@ -163,7 +167,15 @@ export default function ChatLayout() {
   return (
     <Flex h="100vh" w="100vw" direction="row" wrap="nowrap">
       {/* Sidebar */}
-      <Box w={350} style={{borderRight: "1px solid #dee2e6", display: "flex", flexDirection: "column", height: "100%"}}>
+      <Box 
+        w={isMobile ? "100vw" : 350} 
+        style={{
+          borderRight: "1px solid #dee2e6", 
+          display: (isMobile && activeChat) ? "none" : "flex", 
+          flexDirection: "column", 
+          height: "100%"
+        }}
+      >
         {/* User profile header */}
         <Group justify="space-between" p="md" style={{borderBottom: "1px solid #dee2e6", backgroundColor: "#f9f9fa"}}>
           <Group>
@@ -299,7 +311,15 @@ export default function ChatLayout() {
 
 
       {/* Chat Area */}
-      <Box style={{flex: 1, display: "flex", flexDirection: "column", backgroundColor: "#f9f9fa"}}>
+      <Box 
+        style={{
+          flex: 1, 
+          display: (isMobile && !activeChat) ? "none" : "flex", 
+          flexDirection: "column", 
+          backgroundColor: "#f9f9fa",
+          width: isMobile ? "100vw" : "auto"
+        }}
+      >
         {!activeChat ? (
           <Center h="100%">
             <Text c={"dimmed"} size='xl'>Select a chat to start messaging</Text>
@@ -309,6 +329,11 @@ export default function ChatLayout() {
           {/* Chat header */}
           <Paper p={"md"} radius={0} shadow='sm' style={{"zIndex": 10}}>
             <Group wrap='nowrap'>
+              {isMobile && (
+                <ActionIcon variant="subtle" color="gray" onClick={() => setActiveChat(null)}>
+                  <ArrowLeft size={20} />
+                </ActionIcon>
+              )}
               <Avatar color={activeChat.is_group ? "teal" : "grape"} radius={"xl"}>
                 {activeChat.is_group ? "GR" : getAvatarCharacters(activeChat.targetUsername)}
               </Avatar>
