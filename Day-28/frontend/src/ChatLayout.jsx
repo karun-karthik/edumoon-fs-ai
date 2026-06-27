@@ -62,7 +62,7 @@ export default function ChatLayout() {
     }
 
     return () => {
-      if (ws.current) ws.current.close();
+      if (ws.current) ws?.current?.close();
     }
   }, [])
 
@@ -156,6 +156,10 @@ export default function ChatLayout() {
 
   if (!currentUser) return <div>Loading...</div>
 
+  const getAvatarCharacters = (username) => {
+    return username?.substring(0,2)?.toUpperCase();
+  }
+
   return (
     <Flex h="100vh" w="100vw" direction="row" wrap="nowrap">
       {/* Sidebar */}
@@ -163,7 +167,7 @@ export default function ChatLayout() {
         {/* User profile header */}
         <Group justify="space-between" p="md" style={{borderBottom: "1px solid #dee2e6", backgroundColor: "#f9f9fa"}}>
           <Group>
-            <Avatar>{currentUser.username.substring(0,2).toUpperCase()}</Avatar>
+            <Avatar>{getAvatarCharacters(currentUser.username)}</Avatar>
             <Text fw={700} size="md">{currentUser.username}</Text>
           </Group>
           <Button variant="subtle" color="red" size="xs" onClick={handleLogout}>
@@ -202,24 +206,26 @@ export default function ChatLayout() {
             {
               activeTab === 'chats' && (
                 <Stack gap={0}>
-                  {chats.map(chat => (
+                  {chats.map(chat => {
+                    const recipient = chat.participants.filter(u => u.id != currentUser.id)?.[0];
+                    return (
                     <Paper
-                    key={chat.id}
-                    p={"md"}
-                    radius={0}
-                    bg={activeChat?.id === chat.id ? '#e7f5ff' : 'transparent'}
-                    style={{cursor: 'pointer'}}
-                    onClick={() => setActiveChat(chat)}
+                      key={chat.id}
+                      p={"md"}
+                      radius={0}
+                      bg={activeChat?.id === chat.id ? '#e7f5ff' : 'transparent'}
+                      style={{cursor: 'pointer'}}
+                      onClick={() => setActiveChat({...chat, targetUsername: recipient.username})}
                     >
                     <Group wrap='nowrap'>
-                      <Avatar>{chat.is_group ? "GR" : chat.name?.substring(0,2).toUpperCase() || "DC"}</Avatar>
+                      <Avatar>{chat.is_group ? chat.name : getAvatarCharacters(recipient.username)}</Avatar>
                       <Box>
-                        <Text fw={700} size="md">{chat.is_group ? chat.name : "Direct Chat"}</Text>
+                        <Text fw={700} size="md">{chat.is_group ? chat.name : recipient.username}</Text>
                         <Text size="xs" c="dimmed">{chat.participants.length} participants</Text>
                       </Box>
                     </Group>
                   </Paper>
-                  ))}
+                  )})}
                   {chats.length === 0 && (
                     <Text c="dimmed" ta="center" p="xl" mt="md">No chats yet. Go to contacts to add friends!</Text>
                   )}
@@ -304,10 +310,10 @@ export default function ChatLayout() {
           <Paper p={"md"} radius={0} shadow='sm' style={{"zIndex": 10}}>
             <Group wrap='nowrap'>
               <Avatar color={activeChat.is_group ? "teal" : "grape"} radius={"xl"}>
-                {activeChat.is_group ? "GR" : "DC"}
+                {activeChat.is_group ? "GR" : getAvatarCharacters(activeChat.targetUsername)}
               </Avatar>
               <Box>
-                <Text fw={700} size="md">{activeChat.is_group ? activeChat.name : "Direct Chat"}</Text>
+                <Text fw={700} size="md">{activeChat.is_group ? activeChat.name : activeChat.targetUsername}</Text>
                 <Text size="xs" c="dimmed">{activeChat.id}</Text>
               </Box>
             </Group>
