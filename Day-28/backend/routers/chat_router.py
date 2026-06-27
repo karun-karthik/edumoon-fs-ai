@@ -25,15 +25,29 @@ def get_current_user_id(request: Request):
 def get_user_chats(request: Request):
     user_id = get_current_user_id(request)
     chats = list(database.get_collection("chats").find({"participants": user_id}))
-    result = []
-    for chat in chats:
-        result.append({
+
+    participant_ids = { p for chat in chats for p in chat.get("participants", []) }
+    users = list(database.get_collection("users").find({"user_id": {"$in": list(participant_ids)}}))
+
+    user_lookup = {u["user_id"]: u["username"] for u in users}
+
+    result = [
+        {
             "id": chat["chat_id"],
             "is_group": chat.get("is_group", False),
             "name": chat.get("name"),
-            "participants": chat.get("participants", []),
-            "created_at": chat.get("created_at")
-        })
+            "participants": [
+                {
+                    "id": participant,
+                    "username": user_lookup.get(participant),
+                }
+                for participant in chat.get("participants", [])
+            ],
+            "created_at": chat.get("created_at"),
+        }
+        for chat in chats
+    ]
+
     return result
 
 @router.get("/{chat_id}/messages", response_model=List[MessageResponse])

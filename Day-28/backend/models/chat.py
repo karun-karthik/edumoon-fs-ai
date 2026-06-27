@@ -10,7 +10,7 @@ class ChatResponse(BaseModel):
     id: str
     is_group: bool
     name: Optional[str] = None
-    participants: List[str]
+    participants: List
     created_at: datetime
 
 class MessageCreate(BaseModel):
