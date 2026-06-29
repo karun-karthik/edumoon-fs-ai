@@ -1,0 +1,5 @@
+ollama
+lxml[html_clean]
+newspaper3k
+pypdf
+streamlit
